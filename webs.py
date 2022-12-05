@@ -1,7 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 
-nodejs_url='https://nodejs.org/en/download/'
+nodejs_url='https://nodejs.org/en/download/releases/'
 strapi_url='https://strapi.io/changelog'
 
 print("Updated: yesterday")
@@ -9,10 +9,14 @@ print("Updated: yesterday")
 # NodeJS
 response = requests.get(nodejs_url)
 soup = BeautifulSoup(response.text, 'html.parser')
-nodejs_version =str(soup.p)
-strong_begin = nodejs_version.find("<strong>")
-strong_end = nodejs_version.find("</strong>")
-print("Latest NodeJS Version: ", nodejs_version[(strong_begin+8):strong_end])
+nodejs = soup.tbody
+nodejs_version = str(nodejs.select_one(":nth-child(1)").getText())
+nodejs_version_date = str(nodejs.select_one(":nth-child(3)").getText())
+#strong_begin = nodejs_version.find("<strong>")
+#strong_end = nodejs_version.find("</strong>")
+print(nodejs_version)
+print(nodejs_version_date)
+#print("Latest NodeJS Version: ", nodejs_version[(strong_begin+8):strong_end])
 
 #Strapi
 response = requests.get(strapi_url)
