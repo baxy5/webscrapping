@@ -10,12 +10,17 @@ print("Updated: yesterday")
 response = requests.get(nodejs_url)
 soup = BeautifulSoup(response.text, 'html.parser')
 nodejs = soup.tbody
-nodejs_version = str(nodejs.select_one(":nth-child(1)").getText())
-nodejs_version_date = str(nodejs.select_one(":nth-child(3)").getText())
+c = 0
+for tr in nodejs:
+    for td in tr:
+        if td.select_one("LTS"):
+            break
+        print(td)
+print(nodejs_version)
+#nodejs_version = str(nodejs.select_one(":nth-child(5)"))
+#nodejs_version_date = str(nodejs.select_one(":nth-child(3)").getText())
 #strong_begin = nodejs_version.find("<strong>")
 #strong_end = nodejs_version.find("</strong>")
-print(nodejs_version)
-print(nodejs_version_date)
 #print("Latest NodeJS Version: ", nodejs_version[(strong_begin+8):strong_end])
 
 #Strapi
