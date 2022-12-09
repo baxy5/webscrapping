@@ -3,7 +3,8 @@ from bs4 import BeautifulSoup
 
 nodejs_lts_url = 'https://nodejs.org/en/download/'
 nodejs_latest_url = 'https://nodejs.org/en/download/releases/'
-strapi_url='https://strapi.io/changelog'
+strapi_url = 'https://strapi.io/changelog'
+nextjs_url = 'https://nextjs.org/blog'
 
 
 # NodeJS - LTS
@@ -30,3 +31,11 @@ strapi_date_begin = strapi_date.find(">")
 strapi_date_end = strapi_date.find("</")
 
 print("Strapi: %s (%s)" % (strapi_version[strapi_begin:strapi_end] , strapi_date[(strapi_date_begin+1):strapi_date_end]))
+
+# NextJS
+response = requests.get(nextjs_url)
+soup = BeautifulSoup(response.text, 'html.parser')
+nextjs_version = soup.find("h3", {"class": "preview_postTitle_1DQfX"})
+nextjs_version_date = soup.p.getText()
+print(nextjs_version)
+print(nextjs_version_date)
