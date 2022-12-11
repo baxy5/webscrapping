@@ -36,6 +36,5 @@ print("Strapi: %s (%s)" % (strapi_version[strapi_begin:strapi_end] , strapi_date
 response = requests.get(nextjs_url)
 soup = BeautifulSoup(response.text, 'html.parser')
 nextjs_version = soup.find("h3", {"class":"f2 fw7 preview_postTitle__1DQfX"}).getText()
-nextjs_version_date = soup.find("p", {"class":"f5 mute preview_date__DBoeV preview_dateVisible__aPh_Y"})
-print("NextJS:" , nextjs_version)
-print(nextjs_version_date)
+nextjs_version_date = soup.find("p", {"class": "f5"}).getText()
+print("NextJS:" , nextjs_version, "(%s)" % nextjs_version_date)
