@@ -1,0 +1,15 @@
+datasource db {
+  provider = "postgresql"
+  url      = "postgresql://postgres:futball7@localhost:5432/versiontracker?schema=public"
+}
+
+generator client {
+  provider             = "prisma-client-py"
+}
+
+model Technology {
+  id    Int     @id @default(autoincrement())
+  name String  @unique
+  version  String
+  published String
+}
